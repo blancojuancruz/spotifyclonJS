@@ -1,3 +1,5 @@
+console.log('Welcome to my 1st JS proyect')
+
 function containsObject(obj, list) {
     let i;
     for (i = 0; i < list.length; i++) {
@@ -79,6 +81,7 @@ console.log( total(noRepeat) )
 
 
 //
+ 
 
 const createList = []
 let maxSongs = 10
