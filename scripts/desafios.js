@@ -14,6 +14,22 @@ if(!nSongs) {
     nSongs = parseInt(prompt('Ingrese la cantidad de canciones que quiere escuchar'))
 }
 
+const createList = []
+let maxSongs = nSongs
+
+do {
+    const musicName = prompt('Ingrese nombre de la cancion que quiere añadir')
+    createList.push(musicName)
+    console.log(createList.length + musicName)
+} while(createList.length != maxSongs)
+
+const newList = createList.concat(['My new list'])
+alert(newList.join('\n'))
+
+
+//
+
+
 function containsObject(obj, list) {
     let i;
     for (i = 0; i < list.length; i++) {
@@ -79,16 +95,3 @@ console.log( total(noRepeat) )
 
 //
  
-
-const createList = []
-let maxSongs = 10
-
-
-do {
-    const musicName = prompt('Ingrese nombre de la cancion que quiere añadir')
-    createList.push(musicName)
-    console.log(createList.length + musicName)
-} while(createList.length != maxSongs)
-
-const newList = createList.concat(['My new list'])
-alert(newList.join('\n'))
