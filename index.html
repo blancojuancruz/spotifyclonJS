@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css">
-    <title>Spotify Clon</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+    <title>Spotify - Reproductor web</title>
 </head>
 
 <body>
@@ -34,13 +36,11 @@
                 </div>
 
                 <div class="suscribcion">
-                    <div class="mejora_cuenta">
-                        <button>MEJORAR TU CUENTA</button>
-                    </div>
                     <div class="perfil">
-                        <span class="circulo"><img src="img/user.svg" alt=""></span>
-                        <span class="nombre">Usuario</span>
-                        <span><img src="img/salir.svg" alt=""></span>
+                        <span class="nombre">Registrarte</span>
+                    </div>
+                    <div class="mejora_cuenta">
+                        <button>INICIAR SESION</button>
                     </div>
                 </div>
             </header>
@@ -48,22 +48,22 @@
                 <div class="banner">
                     <div class="cancion">
                         <figure>
-                            <img src="img/person_01.png" alt="">
+                            <img src="https://i.scdn.co/image/ab67706f00000002732148ed92f27fac784e3fd0" alt="">
                         </figure>
                     </div>
                     <div class="cancion">
                         <figure>
-                            <img src="img/person_02.png" alt="">
+                            <img src="https://i.scdn.co/image/ab67706f00000002799d54629fcb5e2031ceb774" alt="">
                         </figure>
                     </div>
                     <div class="cancion">
                         <figure>
-                            <img src="img/person_03.png" alt="">
+                            <img src="https://i.scdn.co/image/ab67706f000000020cf6ea047a23087c5a62a2ba" alt="">
                         </figure>
                     </div>
                     <div class="cancion">
                         <figure>
-                            <img src="img/person_04.png" alt="">
+                            <img src="https://i.scdn.co/image/ab67706f000000020e2ff2b38d2e24ec4a58654f" alt="">
                         </figure>
                     </div>
                 </div>
@@ -74,44 +74,56 @@
                 </div>
                 <div class="generos">
                     <div class="cards">
-                        <div class="card_imagen"><img src="img/person_01.png" alt=""></div>
-                        <div class="card_text">
-                            <h4>Autor primero</h4>
+                        <div class="card_imagen">
+                            <img src="https://images.genius.com/e7df2e028f501c6fff5fc0081fb80d71.800x800x1.png" alt="1" id="playSong">
+                        </div>
+                        <div class="card_text" id="cardText">
+                            <h4>YSY A - DESFILAR MIS PENAS (PROD. ASAN)</h4>
                             <img src="img/play.svg" alt="">
                         </div>
                     </div>
                     <div class="cards">
-                        <div class="card_imagen"><img src="img/person_02.png" alt=""></div>
+                        <div class="card_imagen">
+                            <img src="https://i.ytimg.com/vi/5Mfe0e73z9U/maxresdefault.jpg" alt="">
+                        </div>
                         <div class="card_text">
-                            <h4>Autor primero</h4>
+                            <h4>Kidd Keo - Level Up ft. Enry K, Yay (Official Video)</h4>
                             <img src="img/play.svg" alt="">
                         </div>
                     </div>
                     <div class="cards">
-                        <div class="card_imagen"><img src="img/person_03.png" alt=""></div>
+                        <div class="card_imagen">
+                            <img src="https://i.scdn.co/image/ab67616d0000b273d9525f27b0a9e25b1fa21230" alt="">
+                        </div>
                         <div class="card_text">
-                            <h4>Autor primero</h4>
+                            <h4>Rauw Alejandro & Chencho Corleone - Desesperados</h4>
                             <img src="img/play.svg" alt="">
                         </div>
                     </div>
                     <div class="cards">
-                        <div class="card_imagen"><img src="img/person_04.png" alt=""></div>
+                        <div class="card_imagen">
+                            <img src="https://reggaetonsinlimite.b-cdn.net/wp-content/uploads/2022/03/Pantysito.jpeg" alt="">
+                        </div>
                         <div class="card_text">
-                            <h4>Autor primero</h4>
+                            <h4>Feid, Alejo & Robi - Pantysito</h4>
                             <img src="img/play.svg" alt="">
                         </div>
                     </div>
                     <div class="cards">
-                        <div class="card_imagen"><img src="img/person_01.png" alt=""></div>
+                        <div class="card_imagen">
+                            <img src="https://i.ytimg.com/vi/puT6uBmqJMI/maxresdefault.jpg" alt="">
+                        </div>
                         <div class="card_text">
-                            <h4>Autor primero</h4>
-                            <img src="img/play.svg" alt="" id="play">
+                            <h4>DUKI - TOP 5</h4>
+                            <img src="img/play.svg" alt="">
                         </div>
                     </div>
                     <div class="cards">
-                        <div class="card_imagen"><img src="img/person_02.png" alt=""></div>
+                        <div class="card_imagen">
+                            <img src="https://i.ytimg.com/vi/uWRYa2TBTas/maxresdefault.jpg" alt="">
+                        </div>
                         <div class="card_text">
-                            <h4>Autor primero</h4>
+                            <h4>DUKI - Sudor y trabajo</h4>
                             <img src="img/play.svg" alt="">
                         </div>
                     </div>
@@ -123,44 +135,45 @@
 
                 <div class="podcast">
                     <div class="card_podcast">
-                        <img src="img/person_01.png" alt="">
-                        <h4>Titulo</h4>
-                        <p>Podcast primero</p>
+                        <img src="https://i.scdn.co/image/ab6765630000ba8af552fa8c56b44f770641682e" alt="">
+                        <h4>La cruda</h4>
+                        <p>De Migue Granados</p>
                     </div>
                     <div class="card_podcast">
-                        <img src="img/person_02.png" alt="">
-                        <h4>Titulo</h4>
-                        <p>Podcast primero</p>
+                        <img src="https://is5-ssl.mzstatic.com/image/thumb/Podcasts115/v4/02/cb/95/02cb95d7-f3d1-8324-2daa-a7ed82ff0742/mza_101518272621264884.jpg/1200x1200bb.jpg" alt="">
+                        <h4>El Metodo Rebord</h4>
+                        <p>Corta. De Tomas Rebord</p>
                     </div>
                     <div class="card_podcast">
-                        <img src="img/person_03.png" alt="">
-                        <h4>Titulo</h4>
-                        <p>Podcast primero</p>
+                        <img src="https://i.scdn.co/image/ab6765630000ba8a5a59d32127797483ab430bf1" alt="">
+                        <h4>Los Últimos dias de Maradona</h4>
+                        <p>Spotify Studios</p>
                     </div>
                     <div class="card_podcast">
-                        <img src="img/person_04.png" alt="">
-                        <h4>Titulo</h4>
-                        <p>Podcast primero</p>
+                        <img src="https://i.scdn.co/image/ab67706f00000002c1f0d85af2d9bbfb78b6b0d8" alt="">
+                        <h4>Gracias Diego</h4>
+                        <p>Regó de gloria este suelo. Escucha el podcast: <a class="link" href="https://open.spotify.com/episode/6dzhMKvwJr76veho9XXeVZ">Los Últimos dias de Maradona</a></p>
                     </div>
                 </div>
             </div>
         </section>
         <footer>
             <div class="controles">
-                <img src="img/prev_footer.svg" alt="">
-                <img src="img/play_footer.svg" alt="">
-                <img src="img/next_footer.svg" alt="">
+                <i class="bi bi-arrow-left-circle-fill key" id="prevArrow"></i>
+                <i class="bi bi-play-circle-fill" id="playPause"></i>
+                <i class="bi bi-arrow-right-circle-fill key" id="nextArrow"></i>
             </div>
             <div class="progreso">
-                <span>0:00</span>
-                <div class="barra_progreso"></div>
-                <span>5:00</span>
+                <span id="timerStart">0:00</span>
+                <input type="range" name="range" id="progressBar" class="barra_progreso" min="0" value="0" max="100">
+                <span id="timerDuration">0:00</span>
             </div>
         </footer>
 
     </div>
 
-    <!-- <script src="scripts/script.js"></script> -->
+    <script src="scripts/script.js"></script>
+    <!-- <script src="scripts/desafios.js"></script> -->
 </body>
 
 </html>
