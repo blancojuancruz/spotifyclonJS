@@ -260,9 +260,13 @@ body {
     display: flex;
     justify-content: space-between;
     background-color: #282828;
-    cursor: pointer;
+    /* cursor: pointer; */
     border-radius: var(--radius);
     margin: 10px;
+}
+
+.playSong {
+    cursor: pointer;
 }
 
 .container section .contenedor_contenido .generos .cards .card_imagen {
@@ -289,15 +293,17 @@ body {
     width: calc(100% - 80px);
 }
 
-.container section .contenedor_contenido .generos .cards .card_text img {
+.container section .contenedor_contenido .generos .cards .card_text span {
     opacity: 0;
+    font-size: 36px;
+    color: #000000;
 }
 
 .container section .contenedor_contenido .generos .cards:hover {
     background: linear-gradient(#666666, #474747);
 }
 
-.container section .contenedor_contenido .generos .cards:hover img {
+.container section .contenedor_contenido .generos .cards:hover span {
     opacity: 1;
     transition: var(--efecto);
 }
