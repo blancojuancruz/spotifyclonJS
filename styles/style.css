@@ -294,7 +294,7 @@ body {
 }
 
 .container section .contenedor_contenido .generos .cards .card_text span {
-    opacity: 0;
+    /* opacity: 0; */
     font-size: 36px;
     color: #000000;
 }
@@ -303,10 +303,10 @@ body {
     background: linear-gradient(#666666, #474747);
 }
 
-.container section .contenedor_contenido .generos .cards:hover span {
+/* .container section .contenedor_contenido .generos .cards:hover span {
     opacity: 1;
     transition: var(--efecto);
-}
+} */
 
 .container section .contenedor_contenido .podcast .card_podcast {
     transition: var(--efecto);
