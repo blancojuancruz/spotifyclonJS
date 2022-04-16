@@ -243,14 +243,22 @@ body {
     margin-bottom: 20px;
 }
 
-.container section .contenedor_contenido .generos,
-.container section .contenedor_contenido .podcast {
+.container section .contenedor_contenido .generos {
     width: 100%;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     flex-grow: 1;
     margin-bottom: 20px;
+}
+
+.container section .contenedor_contenido .podcast {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    flex-grow: 1;
+    margin-bottom: 50px;
 }
 
 .container section .contenedor_contenido .generos .cards {
@@ -342,6 +350,7 @@ body {
     background: var(--fondo);
     display: flex;
     flex-direction: column;
+    justify-content: center;
     position: fixed;
     width: 100%;
     bottom: 0;
@@ -350,12 +359,54 @@ body {
     color: #ffffff;
 }
 
+.songInfo {
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+}
+
+.volumeControls {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.volumeControls span i {
+    font-size: 1.2em;
+    padding: 0 .5em;
+}
+
+.volumeControls input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: #1ed760;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.mainControls {
+    width: 100%;
+}
+
 .container footer .controles {
     display: flex;
     align-items: center;
-    margin: auto;
+    justify-content: center;
     padding-bottom: .5em;
+}
+
+.controles i {
     cursor: pointer;
+}
+
+#indexsongName {
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #playPause {
@@ -380,12 +431,24 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
-.container footer .progreso .barra_progreso {
+.barra_progreso {
     width: 40%;
     height: 5px;
-    background-color: #282828;
     border-radius: var(--radius);
     margin: 0 1em;
+    display: inline;
+    -webkit-appearance: none;
+    background-color: #bdc3c7;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: #1ed760;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    cursor: pointer;
 }

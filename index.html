@@ -74,78 +74,7 @@
                     <h1>¡Buenos días!</h1>
                 </div>
                 <div class="generos">
-                    <div class="cards">
-                        <div class="card_imagen">
-                            <img src="https://images.genius.com/e7df2e028f501c6fff5fc0081fb80d71.800x800x1.png" alt="1">
-                        </div>
-                        <div class="card_text" id="cardText">
-                            <h4 class="songName">YSY A - DESFILAR MIS PENAS (PROD. ASAN)</h4>
-                            <span>
-                                <i class="bi bi-play-circle playSong" id="1"></i>
-                                <!-- <i class="bi bi-pause-circle playSong" style="display: none;"></i> -->
-                            </span>
-                        </div>
-                    </div>
-                    <div class="cards">
-                        <div class="card_imagen">
-                            <img src="https://i.ytimg.com/vi/5Mfe0e73z9U/maxresdefault.jpg" alt="">
-                        </div>
-                        <div class="card_text">
-                            <h4 class="songName">Kidd Keo - Level Up ft. Enry K, Yay (Official Video)</h4>
-                            <span>
-                                <i class="bi bi-play-circle playSong" id="2"></i>
-                                <!-- <i class="bi bi-pause-circle playSong" style="display: none;"></i> -->
-                            </span>
-                        </div>
-                    </div>
-                    <div class="cards">
-                        <div class="card_imagen">
-                            <img src="https://i.scdn.co/image/ab67616d0000b273d9525f27b0a9e25b1fa21230" alt="">
-                        </div>
-                        <div class="card_text">
-                            <h4 class="songName">Rauw Alejandro & Chencho Corleone - Desesperados</h4>
-                            <span>
-                                <i class="bi bi-play-circle playSong" id="3"></i>
-                                <!-- <i class="bi bi-pause-circle playSong" style="display: none;"></i> -->
-                            </span>
-                        </div>
-                    </div>
-                    <div class="cards">
-                        <div class="card_imagen">
-                            <img src="https://reggaetonsinlimite.b-cdn.net/wp-content/uploads/2022/03/Pantysito.jpeg" alt="">
-                        </div>
-                        <div class="card_text">
-                            <h4 class="songName">Feid, Alejo & Robi - Pantysito</h4>
-                            <span>
-                                <i class="bi bi-play-circle playSong" id="4"></i>
-                                <!-- <i class="bi bi-pause-circle playSong" style="display: none;"></i> -->
-                            </span>
-                        </div>
-                    </div>
-                    <div class="cards">
-                        <div class="card_imagen">
-                            <img src="https://i.ytimg.com/vi/puT6uBmqJMI/maxresdefault.jpg" alt="">
-                        </div>
-                        <div class="card_text">
-                            <h4 class="songName">DUKI - TOP 5</h4>
-                            <span>
-                                <i class="bi bi-play-circle playSong" id="5"></i>
-                                <!-- <i class="bi bi-pause-circle playSong" style="display: none;"></i> -->
-                            </span>
-                        </div>
-                    </div>
-                    <div class="cards">
-                        <div class="card_imagen">
-                            <img src="https://i.ytimg.com/vi/uWRYa2TBTas/maxresdefault.jpg" alt="">
-                        </div>
-                        <div class="card_text">
-                            <h4 class="songName">DUKI - Sudor y trabajo</h4>
-                            <span>
-                                <i class="bi bi-play-circle playSong" id="6"></i>
-                                <!-- <i class="bi bi-pause-circle playSong" style="display: none;"></i> -->
-                            </span>
-                        </div>
-                    </div>
+                    <!--                     -->
                 </div>
                 <div class="titulos">
                     <h2>Programas para probar</h2>
@@ -177,15 +106,24 @@
             </div>
         </section>
         <footer>
-            <div class="controles">
-                <i class="bi bi-arrow-left-circle-fill key" id="prevArrow"></i>
-                <i class="bi bi-play-circle-fill" id="playPause"></i>
-                <i class="bi bi-arrow-right-circle-fill key" id="nextArrow"></i>
+            <div class="songInfo">
+                <span id="indexsongName">YSY A - DESFILAR MIS PENAS (PROD. ASAN)</span>
+                <div class="volumeControls">
+                    <span><i class="bi bi-volume-up-fill" id="masterVolume"></i></span>
+                    <input type="range" class="barra_progresoVolume" min="0" max="100" value="0">
+                </div>
             </div>
-            <div class="progreso">
-                <span id="timerStart">0:00</span>
-                <input type="range" name="range" id="progressBar" class="barra_progreso" min="0" value="0" max="100">
-                <span id="timerDuration">0:00</span>
+            <div class="mainControls">
+                <div class="controles">
+                    <i class="bi bi-arrow-left-circle-fill key" id="prevArrow"></i>
+                    <i class="bi bi-play-circle-fill" id="playPause"></i>
+                    <i class="bi bi-arrow-right-circle-fill key" id="nextArrow"></i>
+                </div>
+                <div class="progreso">
+                    <span id="timerStart">0:00</span>
+                    <input type="range" name="range" id="progressBar" class="barra_progreso" min="0" value="0" max="100">
+                    <span id="timerDuration">0:00</span>
+                </div>
             </div>
         </footer>
 
