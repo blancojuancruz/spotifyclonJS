@@ -40,6 +40,7 @@ body {
 .spotify-logo--text {
     padding: 0 24px;
     margin: 0 0 18px 0;
+    fill: #ffffff;
 }
 
 .container aside .menu {
@@ -48,18 +49,22 @@ body {
     flex-direction: column;
 }
 
-.container aside .menu a {
+.linksContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px 0;
+}
+
+.container aside .menu .linksContainer a {
     text-decoration: none;
     padding: 10px 0;
     font-size: 0.8em;
     color: #c5c5c5;
     font-weight: bold;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
 }
 
-.container aside .menu a span {
+.container aside .menu .linksContainer .img-menuContainer span {
     margin-right: 8px;
 }
 
@@ -302,19 +307,19 @@ body {
 }
 
 .container section .contenedor_contenido .generos .cards .card_text span {
-    /* opacity: 0; */
+    opacity: 0;
     font-size: 36px;
-    color: #000000;
+    color: #169c46;
 }
 
 .container section .contenedor_contenido .generos .cards:hover {
     background: linear-gradient(#666666, #474747);
 }
 
-/* .container section .contenedor_contenido .generos .cards:hover span {
+.container section .contenedor_contenido .generos .cards:hover span {
     opacity: 1;
     transition: var(--efecto);
-} */
+}
 
 .container section .contenedor_contenido .podcast .card_podcast {
     transition: var(--efecto);
@@ -349,8 +354,7 @@ body {
 .container footer {
     background: var(--fondo);
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
     position: fixed;
     width: 100%;
     bottom: 0;
@@ -362,7 +366,7 @@ body {
 .songInfo {
     display: flex;
     flex-direction: column;
-    width: 15%;
+    width: 22%;
 }
 
 .volumeControls {
@@ -386,7 +390,8 @@ body {
 }
 
 .mainControls {
-    width: 100%;
+    width: 50%;
+    align-self: center;
 }
 
 .container footer .controles {
@@ -400,7 +405,7 @@ body {
     cursor: pointer;
 }
 
-#indexsongName {
+#songName {
     font-weight: bold;
     font-size: 13px;
     text-align: center;
