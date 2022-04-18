@@ -261,16 +261,14 @@ audioSong.addEventListener("timeupdate", () => {
     }
   };
 
-  const minutos = (milisegundos) => {
-    const minutos = parseInt(milisegundos / 1 / 60);
-    milisegundos -= minutos * 60 * 1;
-
-    const segundos = milisegundos / 1;
+  const minutos = (segundosP) => {
+    const segundos = Math.round(segundosP % 0x3c).toString();
+    const minutos = (Math.floor(segundosP / 0x3c) % 0x3c).toString();
 
     return `${addCero(minutos)}:${addCero(segundos)}`;
   };
 
-  timeStart.innerHTML = minutos(progress);
+  timeStart.innerHTML = minutos(audioSong.currentTime);
 });
 
 progressBar.addEventListener("change", () => {
