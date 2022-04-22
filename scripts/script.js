@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
   allMyMusic();
-  links();
+  mainBanner();
 });
 // CARGAR AL INICIO
 
-// VARIABLES DECLARAS
+// VARIABLES INICIALIZADAS
 let songIndex = 0;
 let audioSong = new Audio();
 const progressBar = document.getElementById("progressBar");
@@ -14,54 +14,12 @@ const masterVolume = document.getElementById("masterVolume");
 const nextSong = document.getElementById("nextArrow");
 const prevSong = document.getElementById("prevArrow");
 const cardContainer = document.querySelector(".generos");
-const menuLinks = document.querySelector(".menu");
 const timeDuration = document.getElementById("timerDuration");
 const timeStart = document.getElementById("timerStart");
 const volumen = document.getElementsByClassName("barra_progresoVolume");
+const replay = document.getElementById("replay");
+const loopSong = document.getElementById("loopSong");
 // VARIABLES DECLARADAS
-
-// SCRIPTING DE LINKS ASIDE
-const allMyLinks = [
-  { name: "Inicio", href: "#", srcImg: "img/home.svg" },
-  { name: "Buscar", href: "#", srcImg: "img/search.svg" },
-  { name: "Tu biblioteca", href: "#", srcImg: "img/library.svg" },
-  { name: "Crear Lista", href: "#", srcImg: "img/add.svg" },
-  { name: "Canciones que te gustan", href: "#", srcImg: "img/heart.svg" },
-];
-
-function links() {
-  allMyLinks.forEach((link) => {
-    const linksContainer = document.createElement("div");
-    linksContainer.classList.add("linksContainer");
-
-    const a = document.createElement("a");
-    a.href = link.href;
-    a.textContent = link.name;
-
-    const span = document.createElement("span");
-
-    const aImg = document.createElement("img");
-    aImg.src = link.srcImg;
-
-    const divImg = document.createElement("div");
-    divImg.classList.add("img-menuContainer");
-
-    const divA = document.createElement("div");
-
-    linksContainer.appendChild(divImg);
-    linksContainer.appendChild(divA);
-
-    divImg.appendChild(span);
-    divImg.appendChild(aImg);
-    span.appendChild(aImg);
-    //
-
-    divA.appendChild(a);
-
-    menuLinks.appendChild(linksContainer);
-  });
-}
-// SCRIPTING DE LINKS ASIDE
 
 // ARRAY DE OBJETOS (CANCIONES)
 const songs = [
@@ -215,7 +173,7 @@ function allMyMusic() {
       e.target.classList.remove("bi-play-circle");
       e.target.classList.add("bi-pause-circle");
       audioSong.src = `audio/${songIndex + 1}.mp3`;
-      songName.innerText = songs[songIndex].name;
+      songName.innerText = `Now Playing: ${songs[songIndex].name}`;
       timeDuration.innerText = songs[songIndex].duration;
       audioSong.play();
       audioSong.currentTime = 0;
@@ -282,11 +240,12 @@ audioSong.addEventListener("ended", () => {
     songIndex += 1;
   }
   audioSong.src = `audio/${songIndex + 1}.mp3`;
-  songName.innerText = songs[songIndex].name;
+  songName.innerText = `Now Playing: ${songs[songIndex].name}`;
   timeDuration.innerText = songs[songIndex].duration;
   audioSong.currentTime = 0;
   audioSong.play();
 });
+
 // TIMER PARA LA BARRA DE PROGRESO
 
 // FLECHAS PREV/NEXT
@@ -297,7 +256,7 @@ nextSong.addEventListener("click", () => {
     songIndex += 1;
   }
   audioSong.src = `audio/${songIndex + 1}.mp3`;
-  songName.innerText = songs[songIndex].name;
+  songName.innerText = `Now Playing: ${songs[songIndex].name}`;
   timeDuration.innerText = songs[songIndex].duration;
   audioSong.currentTime = 0;
   audioSong.play();
@@ -312,7 +271,7 @@ prevSong.addEventListener("click", () => {
     songIndex -= 1;
   }
   audioSong.src = `audio/${songIndex + 1}.mp3`;
-  songName.innerText = songs[songIndex].name;
+  songName.innerText = `Now Playing: ${songs[songIndex].name}`;
   timeDuration.innerText = songs[songIndex].duration;
   audioSong.currentTime = 0;
   audioSong.play();
@@ -320,3 +279,161 @@ prevSong.addEventListener("click", () => {
   playPause.classList.add("bi-pause-circle-fill");
 });
 // FLECHAS PREV/NEXT
+
+// REPLAY
+replay.addEventListener("click", () => {
+  audioSong.currentTime = 0;
+});
+// REPLAY
+
+loopSong.addEventListener("click", () => {
+  let switchIcon = loopSong.innerText;
+
+  switch (switchIcon) {
+    case "repeat":
+      loopSong.innerHTML = "repeat_on";
+      loopSong.setAttribute("title", "Replay Automatico Activado");
+      break;
+
+    case "repeat_on":
+      loopSong.innerHTML = "shuffle_on";
+      loopSong.setAttribute("title", "Aleatorio");
+      break;
+
+    case "shuffle_on":
+      loopSong.innerHTML = "repeat";
+      loopSong.setAttribute("title", "Activar replay Automatico");
+      break;
+  }
+});
+
+// audioSong.addEventListener("ended", () => {
+//   let switchIcon = loopSong.innerText;
+
+//   switch (switchIcon) {
+//     case "repeat_on":
+//       audioSong.currentTime = 0;
+//       break;
+
+//     case "shuffle_on":
+//     // let randomIndex = Math.floor(Math.random() * songs.length + 1);
+//     // do {
+//     //   randomIndex = Math.floor(Math.random() * songs.length + 1);
+//     // } while ((songIndex = randomIndex));
+//     // songIndex = randomIndex;
+//     // audioSong.src = `audio/${songIndex + 1}.mp3`;
+//     // songName.innerText = `Now Playing: ${songs[songIndex].name}`;
+//     // timeDuration.innerText = songs[songIndex].duration;
+//     // audioSong.currentTime = 0;
+//     // audioSong.play();
+//     // break;
+//   }
+// });
+
+////////////////////////////////
+
+const fadeContent = document.querySelector(".contenedor_degradado");
+
+const mainDiv = document.createElement("div");
+mainDiv.classList.add("banner");
+
+const noBannerDiv = document.createElement("div");
+noBannerDiv.classList.add("contenedor_playlist");
+noBannerDiv.setAttribute("id", "slider");
+
+const sliderBtnRight = document.createElement("div");
+sliderBtnRight.classList.add("sliderBtn", "sliderBtnRight");
+sliderBtnRight.setAttribute("id", "btn_right");
+
+const sliderBtnLeft = document.createElement("div");
+sliderBtnLeft.classList.add("sliderBtn", "sliderBtnLeft");
+sliderBtnLeft.setAttribute("id", "btn_left");
+
+const sliderArrowR = document.createElement("i");
+sliderArrowR.classList.add("bi-arrow-right-circle-fill");
+
+const sliderArrowL = document.createElement("i");
+sliderArrowL.classList.add("bi-arrow-left-circle-fill");
+
+sliderBtnLeft.appendChild(sliderArrowL);
+sliderBtnRight.appendChild(sliderArrowR);
+
+mainDiv.appendChild(sliderBtnLeft);
+mainDiv.appendChild(sliderBtnRight);
+
+fadeContent.appendChild(mainDiv);
+fadeContent.appendChild(noBannerDiv);
+
+const bannerIndex = [
+  {
+    name: "defaultPlaylist",
+    src: "https://i.scdn.co/image/ab67706f00000002732148ed92f27fac784e3fd0",
+    id: "1",
+  },
+  {
+    name: "defaultPlaylist",
+    src: "https://i.scdn.co/image/ab67706f00000002799d54629fcb5e2031ceb774",
+    id: "2",
+  },
+  {
+    name: "defaultPlaylist",
+    src: "https://i.scdn.co/image/ab67706f000000020cf6ea047a23087c5a62a2ba",
+    id: "3",
+  },
+  {
+    name: "defaultPlaylist",
+    src: "https://i.scdn.co/image/ab67706f000000020e2ff2b38d2e24ec4a58654f",
+    id: "4",
+  },
+  {
+    name: "defaultPlaylist",
+    src: "https://i.scdn.co/image/ab67706f000000025373a723bc97f5f834648c2b",
+    id: "5",
+  },
+];
+
+function mainBanner() {
+  bannerIndex.forEach((banner) => {
+    const figuresContainer = document.createElement("div");
+    figuresContainer.classList.add("cancion");
+    const figure = document.createElement("figure");
+    const image = document.createElement("img");
+    image.src = banner.src;
+
+    mainDiv.appendChild(noBannerDiv);
+    mainDiv.appendChild(figuresContainer);
+    mainDiv.appendChild(figure);
+    mainDiv.appendChild(image);
+
+    noBannerDiv.appendChild(figuresContainer);
+    noBannerDiv.appendChild(figure);
+    noBannerDiv.appendChild(image);
+
+    figuresContainer.appendChild(figure);
+    figuresContainer.appendChild(image);
+
+    figure.appendChild(image);
+  });
+}
+
+const modalBtn = document.getElementById("modalButton");
+const modal = document.querySelector(".modalBody");
+const closeModal = document.getElementById("formIcon");
+const modalShow = document.getElementById("modal");
+
+modalBtn.addEventListener("click", () => {
+  modal.classList.add("modalShow");
+  modalShow.style.transform = "translateY(0%)";
+});
+
+closeModal.addEventListener("click", () => {
+  modal.classList.remove("modalShow");
+  modalShow.style.transform = "translateY(-200%)";
+});
+
+window.addEventListener("click", (element) => {
+  if (element.target == modal) {
+    modal.classList.remove("modalShow");
+    modalShow.style.transform = "translateY(-200%)";
+  }
+});
