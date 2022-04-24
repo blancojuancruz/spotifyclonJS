@@ -85,9 +85,9 @@
                 </div>
 
                 <div class="suscribcion">
-                    <div class="perfil user">
+                    <div class="perfil user" id="user">
                         <span class="circulo"><img src="img/user.svg" alt=""></span>
-                        <span class="nombre">Usuario</span>
+                        <span class="nombre" id="name">Usuario</span>
                     </div>
                     <div class="perfil">
                         <span class="nombre">
@@ -197,24 +197,24 @@
                     <h5>Ingresar</h5>
                     <i class="material-icons" id="formIcon">close</i>
                 </div>
-                <form class="modalForm">
+                <form class="modalForm" id="modalForm">
                     <div class="userDiv">
                         <label for="userInput" class="formLabel">Usuario</label>
-                        <input type="email" id="userInput" class="formInput">
-                        <div class="data">
-                            Nunca compartiremos tus datos
-                        </div>
+                        <input type="text" id="userInput" class="formInput" required>
                     </div>
                     <div class="passwordDiv">
                         <label for="formPassword" class="formLabel">Contraseña</label>
-                        <input type="password" id="formPassword" class="formInput">
+                        <input type="password" id="formPassword" class="formInput" required>
+                    </div>
+                    <div class="data">
+                        Nunca compartiremos tus datos
                     </div>
                     <div class="checkboxDiv">
                         <input type="checkbox" id="formCheck">
                         <label for="formCheck" class="formLabel">Recordarme</label>
                     </div>
                     <div class="formBtn">
-                        <button class="frmBtn">
+                        <button class="frmBtn" id="formButton">
                             Iniciar Sesión
                         </button>
                     </div>

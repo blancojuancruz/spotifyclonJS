@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   allMyMusic();
+  showLikedMusic(likedMusic);
 });
 // CARGAR AL INICIO
 
@@ -29,9 +30,18 @@ const replay = document.getElementById("replay");
 const loopSong = document.getElementById("loopSong");
 const likedSongsModal = document.getElementById("likedSongsList");
 const likedMusicElement = document.getElementById("likedSongs");
+const closeX = document.getElementById("closeList");
 const likedMusic = [];
-
-// VARIABLES DECLARADAS
+const modalBtn = document.getElementById("modalButton");
+const modal = document.querySelector(".modalBody");
+const closeModal = document.getElementById("formIcon");
+const modalShow = document.getElementById("modal");
+const formBtn = document.getElementById("formButton");
+const closeSideModal = document.getElementById("closeSideModal");
+const modalForm = document.getElementById("modalForm");
+const user = document.getElementById("name");
+const userName = document.getElementById("userInput");
+// VARIABLES INICIALIZADAS
 
 // ARRAY DE OBJETOS (CANCIONES)
 const songs = [
@@ -163,11 +173,9 @@ function allMyMusic() {
       if (likeSong.innerText == "favorite") {
         likeSong.innerHTML = "thumb_down";
         addFavorites(song.id);
-        closeSideModal();
       } else {
         likeSong.innerHTML = "favorite";
         removeFavorites(song.id);
-        closeSideModal();
       }
     };
 
@@ -219,40 +227,28 @@ function allMyMusic() {
   });
 }
 // SCRIPTING CANCIONES INICIO
-const closeSideModal = () => {
-  const closeX = document.getElementById("closeList");
-  closeX.addEventListener("click", () => {
-    likedMusicElement.classList.remove("showFavoriteSongs");
-  });
-};
 
+// AÑADIR A ME GUSTA
 const addFavorites = (id) => {
   const likedSong = songs.find((song) => song.id === id);
   likedMusic.push(likedSong);
   showLikedMusic(likedMusic);
 };
+// AÑADIR A ME GUSTA
 
-const removeFavorites = (id) => {
-  const item = likedMusic.find((song) => song.id === id);
+// QUITAR DE ME GUSTA
+const removeFavorites = (songID) => {
+  const item = likedMusic.find((song) => song.id === songID);
   const index = likedMusic.indexOf(item);
   likedMusic.splice(index, 1);
   showLikedMusic(likedMusic);
+  eliminarLS(likedMusic);
 };
-
-const closeList = document.createElement("span");
-closeList.classList.add("material-icons", "closeList");
-closeList.setAttribute("id", "closeList");
-closeList.textContent = "close";
-
-const titleCont = document.createElement("h3");
-titleCont.textContent = "Tus favoritos";
-
-likedMusicElement.appendChild(closeList);
-likedMusicElement.appendChild(titleCont);
+// QUITAR DE ME GUSTA
 
 likedSongsModal.addEventListener("click", () => {
+  showLikedMusic(likedMusic);
   likedMusicElement.classList.add("showFavoriteSongs");
-  closeSideModal();
 });
 
 function showLikedMusic(likedMusic) {
@@ -260,14 +256,18 @@ function showLikedMusic(likedMusic) {
 
   const closeList = document.createElement("span");
   closeList.classList.add("material-icons", "closeList");
-  closeList.setAttribute("id", "closeList");
+  closeList.setAttribute("id", "closeSideModal");
   closeList.textContent = "close";
+  closeList.onclick = () => {
+    likedMusicElement.classList.remove("showFavoriteSongs");
+  };
 
   const titleCont = document.createElement("h3");
   titleCont.textContent = "Tus favoritos";
 
   likedMusicElement.appendChild(closeList);
   likedMusicElement.appendChild(titleCont);
+  addSongToLocalStorage(likedMusic);
 
   likedMusic.forEach((song) => {
     const divCards = document.createElement("div");
@@ -287,30 +287,16 @@ function showLikedMusic(likedMusic) {
     cardTitle.classList.add("songName");
     cardTitle.textContent = song.name;
 
-    const divSeparate = document.createElement("div");
-    divSeparate.classList.add("separate");
-
-    // const deleteSong = document.createElement("span");
-    // deleteSong.classList.add("material-icons", "deleteSong");
-    // deleteSong.setAttribute("id", "deleteSong");
-    // deleteSong.textContent = "delete";
-
     divCards.appendChild(divImg);
     divCards.appendChild(divcardTxt);
     divCards.appendChild(imgCard);
     divCards.appendChild(cardTitle);
-    divCards.appendChild(divSeparate);
-    // divCards.appendChild(deleteSong);
 
     divImg.appendChild(imgCard);
 
     divcardTxt.appendChild(cardTitle);
 
-    // divSeparate.appendChild(deleteSong);
-
     likedMusicElement.appendChild(divCards);
-
-    closeSideModal();
   });
 }
 
@@ -326,6 +312,7 @@ playPause.addEventListener("click", () => {
     playPause.classList.add("bi-play-circle-fill");
   }
 });
+
 // FUNCIONALIDAD DE BOTTON "PLAY/PLAUSE"
 
 const calculateTime = (secs) => {
@@ -359,8 +346,7 @@ audioSong.addEventListener("timeupdate", () => {
   timeStart.innerHTML = minutos(audioSong.currentTime);
 });
 
-progressBar.addEventListener("change", (e) => {
-  e.preventDefault();
+progressBar.addEventListener("change", () => {
   audioSong.currentTime = (progressBar.value * audioSong.duration) / 100;
 });
 
@@ -412,7 +398,6 @@ audioSong.addEventListener("ended", () => {
   }
   loadMusic();
 });
-
 // TIMER PARA LA BARRA DE PROGRESO
 
 // FLECHAS PREV/NEXT
@@ -442,17 +427,17 @@ replay.addEventListener("click", () => {
 // REPLAY
 
 // MODAL WINDOW FOR LOG IN
-const modalBtn = document.getElementById("modalButton");
-const modal = document.querySelector(".modalBody");
-const closeModal = document.getElementById("formIcon");
-const modalShow = document.getElementById("modal");
-
 modalBtn.addEventListener("click", () => {
   modal.classList.add("modalShow");
   modalShow.style.transform = "translateY(0%)";
 });
 
 closeModal.addEventListener("click", () => {
+  modal.classList.remove("modalShow");
+  modalShow.style.transform = "translateY(-200%)";
+});
+
+formBtn.addEventListener("submit", () => {
   modal.classList.remove("modalShow");
   modalShow.style.transform = "translateY(-200%)";
 });
@@ -464,3 +449,41 @@ window.addEventListener("click", (element) => {
   }
 });
 // MODAL WINDOW FOR LOG IN
+
+modalForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  modal.classList.remove("modalShow");
+  modalShow.style.transform = "translateY(-200%)";
+  user.innerHTML = userName.value;
+});
+
+function addSongToLocalStorage(myLocalStorage) {
+  let songs;
+  songs = this.songObjLocalStorage();
+  songs.push(myLocalStorage);
+  localStorage.setItem("likedSongs", JSON.stringify(songs));
+}
+
+function songObjLocalStorage() {
+  let songLS;
+
+  if (localStorage.getItem("likedSongs") === null) {
+    songLS = [];
+  } else {
+    songLS = JSON.parse(localStorage.getItem("likedSongs"));
+  }
+
+  return songLS;
+}
+
+function eliminarLS(songID) {
+  let songsLS;
+  songsLS = this.songObjLocalStorage();
+  songsLS.forEach(function (songLS, index) {
+    if (songLS.id === songID) {
+      songsLS.splice(index, 1);
+    }
+  });
+
+  localStorage.setItem("likedSongs", JSON.stringify(songsLS));
+}
