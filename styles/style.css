@@ -23,11 +23,11 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* @media screen and (max-width: 1440px) {
+@media screen and (max-width: 1440px) {
     .container aside .menu a {
         font-size: .8em;
     }
-} */
+}
 
 .container {
     position: relative;
@@ -147,6 +147,24 @@ body {
     margin-left: 1em;
 }
 
+.user {
+    margin-right: 20px;
+}
+
+.container section header .suscribcion .perfil .circulo {
+    background-color: #333333;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circulo {
+    margin-right: 5px;
+}
+
 .container section header .suscribcion .mejora_cuenta button:hover {
     transform: scale(1.1);
 }
@@ -199,7 +217,7 @@ body {
     position: relative;
 }
 
-.sliderBtn {
+/* .sliderBtn {
     position: absolute;
     top: 50%;
     border-radius: 50%;
@@ -224,7 +242,7 @@ body {
 
 .sliderBtnRight {
     right: 10px;
-}
+} */
 
 .contenedor_playlist {
     position: relative;
@@ -316,13 +334,15 @@ body {
     display: flex;
     justify-content: space-between;
     background-color: #282828;
-    /* cursor: pointer; */
     border-radius: var(--radius);
     margin: 10px;
 }
 
-.playSong {
-    cursor: pointer;
+.separate {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 20%;
 }
 
 .container section .contenedor_contenido .generos .cards .card_imagen {
@@ -337,10 +357,6 @@ body {
     border-bottom-left-radius: var(--radius);
 }
 
-.playBtn {
-    cursor: pointer;
-}
-
 .container section .contenedor_contenido .generos .cards .card_text {
     display: flex;
     justify-content: space-between;
@@ -349,19 +365,24 @@ body {
     width: calc(100% - 80px);
 }
 
-.container section .contenedor_contenido .generos .cards .card_text span {
+.container section .contenedor_contenido .generos .cards .separate .playSpan {
     opacity: 0;
     font-size: 36px;
     color: #169c46;
+    cursor: pointer;
 }
 
 .container section .contenedor_contenido .generos .cards:hover {
     background: linear-gradient(#666666, #474747);
 }
 
-.container section .contenedor_contenido .generos .cards:hover span {
+.container section .contenedor_contenido .generos .cards:hover .playSpan {
     opacity: 1;
     transition: var(--efecto);
+}
+
+.like {
+    color: #e01414d7;
 }
 
 .container section .contenedor_contenido .podcast .card_podcast {
@@ -404,6 +425,7 @@ body {
     padding: var(--padding);
     border-top: 1px solid #282828;
     color: #ffffff;
+    z-index: 101;
 }
 
 .songInfo {
@@ -489,7 +511,7 @@ body {
     border-radius: var(--radius);
     margin: 0 1em;
     display: inline;
-    -webkit-appearance: none;
+    -webkit-appearance: sliderthumb-vertical;
     background-color: #bdc3c7;
 }
 
@@ -498,7 +520,7 @@ body {
 }
 
 input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
+    -webkit-appearance: sliderthumb-vertical;
     background-color: #1ed760;
     width: 16px;
     height: 16px;
@@ -624,4 +646,87 @@ input[type="range"]::-webkit-slider-thumb {
     background-color: #169c46;
     color: white;
     transition: 0.4s;
+}
+
+
+
+/*                */
+.closeList {
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.favoriteSongs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    max-width: 280px;
+    height: 100vh;
+    background-color: #000000;
+    padding: var(--padding);
+    transition: transform 1s;
+    transform: translateX(-200%);
+}
+
+.showFavoriteSongs {
+    transform: translateX(0);
+    z-index: 100;
+}
+
+.favoriteSongs h3 {
+    color: #169c46;
+    font-size: 20px;
+    font-weight: bold;
+    align-self: center;
+    margin-bottom: 10px;
+}
+
+.favoriteSongs .cards {
+    transition: var(--efecto);
+    display: flex;
+    background-color: #282828;
+    border-radius: var(--radius);
+    margin: 10px;
+    width: 100%;
+}
+
+.favoriteSongs .cards .separate {
+    display: flex;
+    align-items: center;
+    width: 20%;
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+
+.favoriteSongs .cards .card_imagen {
+    width: 40px;
+    height: 42px;
+}
+
+.favoriteSongs .cards .card_imagen img {
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: var(--radius);
+    border-bottom-left-radius: var(--radius);
+}
+
+.favoriteSongs .cards .card_text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    width: calc(100% - 80px);
+}
+
+.favoriteSongs .cards .card_text h4 {
+    font-size: 10px;
+}
+
+.favoriteSongs .separate:hover {
+    background: linear-gradient(#666666, #474747);
 }
