@@ -649,8 +649,9 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 
-
 /*                */
+
+
 .closeList {
     color: #ffffff;
     font-size: 20px;
@@ -691,6 +692,13 @@ input[type="range"]::-webkit-slider-thumb {
     display: flex;
     align-items: center;
     width: 20%;
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+
+.likeRemove {
+    display: flex;
+    align-items: center;
     border-radius: var(--radius);
     cursor: pointer;
 }

@@ -1,15 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+  loadEvents();
   allMyMusic();
   showLikedMusic();
   loadLocalStorage();
 });
 
-// CARGAR AL INICIO
-
-// VARIABLES INICIALIZADAS
-let songIndex = 0;
-let audioSong = new Audio();
-const loadMusic = () => {
+function loadMusic() {
   audioSong.src = `audio/${songIndex + 1}.mp3`;
   songName.innerText = `Now Playing: ${songs[songIndex].name}`;
   timeDuration.innerText = songs[songIndex].duration;
@@ -17,34 +13,8 @@ const loadMusic = () => {
   audioSong.currentTime = 0;
   playPause.classList.remove("bi-play-circle-fill");
   playPause.classList.add("bi-pause-circle-fill");
-};
-const progressBar = document.getElementById("progressBar");
-const playPause = document.getElementById("playPause");
-const songName = document.getElementById("songName");
-const masterVolume = document.getElementById("masterVolume");
-const nextSong = document.getElementById("nextArrow");
-const prevSong = document.getElementById("prevArrow");
-const cardContainer = document.querySelector(".generos");
-const timeDuration = document.getElementById("timerDuration");
-const timeStart = document.getElementById("timerStart");
-const volumen = document.getElementsByClassName("barra_progresoVolume");
-const replay = document.getElementById("replay");
-const loopSong = document.getElementById("loopSong");
-const closeX = document.getElementById("closeList");
-const modalBtn = document.getElementById("modalButton");
-const modal = document.querySelector(".modalBody");
-const closeModal = document.getElementById("formIcon");
-const likedMusicElement = document.getElementById("likedSongs");
-const modalShow = document.getElementById("modal");
-const formBtn = document.getElementById("formButton");
-const closeSideModal = document.getElementById("closeSideModal");
-const modalForm = document.getElementById("modalForm");
-const user = document.getElementById("name");
-const userName = document.getElementById("userInput");
-const likedMusic = [];
-// VARIABLES INICIALIZADAS
+}
 
-// ARRAY DE OBJETOS (CANCIONES)
 const songs = [
   {
     name: "YSY A - DESFILAR MIS PENAS (PROD. ASAN)",
@@ -131,9 +101,7 @@ const songs = [
     duration: "02:53",
   },
 ];
-// ARRAY DE OBJETOS (CANCIONES)
 
-// SCRIPTING CANCIONES INICIO
 function allMyMusic() {
   songs.forEach((song) => {
     const divCards = document.createElement("div");
@@ -171,15 +139,9 @@ function allMyMusic() {
     likeSong.classList.add("material-icons");
     likeSong.innerText = "favorite";
     likeSong.onclick = () => {
-      if (likeSong.innerText == "favorite") {
-        likeSong.innerHTML = "thumb_down";
-        addFavorites(song.id);
-      } else {
-        likeSong.innerHTML = "favorite";
-        removeFavorites(song.id);
-        let songID = likeSong.getAttribute("data-ID");
-        removeLocalStorage(songID);
-      }
+      addFavorites(song.id);
+
+      likeSong.style.opacity = "0";
     };
 
     divCards.appendChild(divImg);
@@ -229,25 +191,6 @@ function allMyMusic() {
     });
   });
 }
-// SCRIPTING CANCIONES INICIO
-
-// AÑADIR A ME GUSTA
-const addFavorites = (id) => {
-  const likedSong = songs.find((song) => song.id === id);
-  likedMusic.push(likedSong);
-  showLikedMusic(likedMusic);
-  addSongToLocalStorage(likedSong);
-};
-// AÑADIR A ME GUSTA
-
-// QUITAR DE ME GUSTA
-const removeFavorites = (id) => {
-  let item = likedMusic.find((song) => song.id === id);
-  let index = likedMusic.indexOf(item);
-  likedMusic.splice(index, 1);
-  showLikedMusic();
-};
-// QUITAR DE ME GUSTA
 
 function showLikedMusic() {
   likedMusicElement.innerHTML = "";
@@ -266,6 +209,20 @@ function showLikedMusic() {
     divcardTxt.classList.add("card_text");
     divcardTxt.setAttribute("id", "cardText");
 
+    const divSeparate = document.createElement("div");
+    divSeparate.classList.add("likeRemove");
+
+    const removeSpan = document.createElement("span");
+
+    const removeIcon = document.createElement("i");
+    removeIcon.classList.add("material-icons");
+    removeIcon.innerText = "thumb_down";
+    removeIcon.onclick = () => {
+      removeFavorites();
+      let songID = removeIcon.getAttribute("data-ID");
+      removeLocalStorage(songID);
+    };
+
     const divImg = document.createElement("div");
     divImg.classList.add("card_imagen");
 
@@ -280,29 +237,35 @@ function showLikedMusic() {
     divCards.appendChild(divcardTxt);
     divCards.appendChild(imgCard);
     divCards.appendChild(cardTitle);
+    divCards.appendChild(divSeparate);
 
     divImg.appendChild(imgCard);
 
     divcardTxt.appendChild(cardTitle);
+    divcardTxt.appendChild(divSeparate);
+
+    divSeparate.appendChild(removeSpan);
+    divSeparate.appendChild(removeIcon);
+
+    removeSpan.appendChild(removeIcon);
 
     likedMusicElement.appendChild(divCards);
   });
 }
 
-// FUNCIONALIDAD DE BOTTON "PLAY/PLAUSE"
-playPause.addEventListener("click", () => {
-  if (audioSong.paused || audioSong.currentTime <= 0) {
-    audioSong.play();
-    playPause.classList.remove("bi-play-circle-fill");
-    playPause.classList.add("bi-pause-circle-fill");
-  } else {
-    audioSong.pause();
-    playPause.classList.remove("bi-pause-circle-fill");
-    playPause.classList.add("bi-play-circle-fill");
-  }
-});
+const addFavorites = (id) => {
+  const likedSong = songs.find((song) => song.id === id);
+  likedMusic.push(likedSong);
+  showLikedMusic(likedMusic);
+  addSongToLocalStorage(likedSong);
+};
 
-// FUNCIONALIDAD DE BOTTON "PLAY/PLAUSE"
+const removeFavorites = (id) => {
+  let item = likedMusic.find((song) => song.id === id);
+  let index = likedMusic.indexOf(item);
+  likedMusic.splice(index, 1);
+  showLikedMusic();
+};
 
 const calculateTime = (secs) => {
   const minutes = Math.floor(secs / 60);
@@ -312,182 +275,13 @@ const calculateTime = (secs) => {
   return `${returnedMinutes}:${returnedSeconds}`;
 };
 
-// TIMER PARA LA BARRA DE PROGRESO
-audioSong.addEventListener("timeupdate", () => {
-  progress = parseInt((audioSong.currentTime / audioSong.duration) * 100);
-  progressBar.value = progress;
-
-  const addCero = (valor) => {
-    if (valor < 10) {
-      return "0" + valor;
-    } else {
-      return "" + valor;
-    }
-  };
-
-  const minutos = (segundosP) => {
-    const segundos = Math.round(segundosP % 0x3c).toString();
-    const minutos = (Math.floor(segundosP / 0x3c) % 0x3c).toString();
-
-    return `${addCero(minutos)}:${addCero(segundos)}`;
-  };
-
-  timeStart.innerHTML = minutos(audioSong.currentTime);
-});
-
-progressBar.addEventListener("change", () => {
-  audioSong.currentTime = (progressBar.value * audioSong.duration) / 100;
-});
-
-// EVENTO PARA QUE SE REPITA AUTOMATICAMENTE LA CANCION
-audioSong.addEventListener("ended", () => {
-  let switchIcon = loopSong.innerText;
-
-  switch (switchIcon) {
-    case "repeat_one":
-      songIndex -= 1;
-      break;
-
-    case "shuffle_on":
-      let randomIndex = Math.floor(Math.random() * songs.length + 1);
-      do {
-        randomIndex = Math.floor(Math.random() * songs.length + 1);
-      } while (songIndex === randomIndex);
-      songIndex = randomIndex;
-      break;
-  }
-});
-
-loopSong.addEventListener("click", () => {
-  let switchIcon = loopSong.innerText;
-
-  switch (switchIcon) {
-    case "repeat":
-      loopSong.innerHTML = "repeat_one";
-      loopSong.setAttribute("title", "Replay Automatico Activado");
-      break;
-
-    case "repeat_one":
-      loopSong.innerHTML = "shuffle_on";
-      loopSong.setAttribute("title", "Aleatorio");
-      break;
-
-    case "shuffle_on":
-      loopSong.innerHTML = "repeat";
-      loopSong.setAttribute("title", "Activar replay Automatico");
-      break;
-  }
-});
-
-audioSong.addEventListener("ended", () => {
-  if (songIndex >= 11) {
-    songIndex = 0;
-  } else {
-    songIndex += 1;
-  }
-  loadMusic();
-});
-// TIMER PARA LA BARRA DE PROGRESO
-
-// FLECHAS PREV/NEXT
-nextSong.addEventListener("click", () => {
-  if (songIndex >= 11) {
-    songIndex = 0;
-  } else {
-    songIndex += 1;
-  }
-  loadMusic();
-});
-
-prevSong.addEventListener("click", () => {
-  if (songIndex <= 0) {
-    songIndex = 0;
-  } else {
-    songIndex -= 1;
-  }
-  loadMusic();
-});
-// FLECHAS PREV/NEXT
-
-// REPLAY
-replay.addEventListener("click", () => {
-  audioSong.currentTime = 0;
-});
-// REPLAY
-
-// MODAL WINDOW FOR LOG IN
-modalBtn.addEventListener("click", () => {
-  modal.classList.add("modalShow");
-  modalShow.style.transform = "translateY(0%)";
-});
-
-closeModal.addEventListener("click", () => {
-  modal.classList.remove("modalShow");
-  modalShow.style.transform = "translateY(-200%)";
-});
-
-formBtn.addEventListener("submit", () => {
-  modal.classList.remove("modalShow");
-  modalShow.style.transform = "translateY(-200%)";
-});
-
-window.addEventListener("click", (element) => {
-  if (element.target == modal) {
-    modal.classList.remove("modalShow");
-    modalShow.style.transform = "translateY(-200%)";
-  }
-});
-// MODAL WINDOW FOR LOG IN
-
-modalForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  modal.classList.remove("modalShow");
-  modalShow.style.transform = "translateY(-200%)";
-  user.innerHTML = userName.value;
-});
-
 function addSongToLocalStorage(song) {
   let likedSongsArray = JSON.parse(localStorage.getItem("LikedMusic")) || [];
   likedSongsArray.push(song);
 
-  // TRANSFORMO MI ARRAY DE OBJETOS A JSON
   let likedSongsArrayJSON = JSON.stringify(likedSongsArray);
-  //SETEO ITEM A GUARDAR KEY LIKED MUSIC Y EN QUE VALOR
+
   localStorage.setItem("LikedMusic", likedSongsArrayJSON);
-}
-
-function loadLocalStorage() {
-  let likedSongsArray = JSON.parse(localStorage.getItem("LikedMusic"));
-
-  likedSongsArray.forEach((song) => {
-    const divCards = document.createElement("div");
-    divCards.classList.add("cards");
-
-    const divcardTxt = document.createElement("div");
-    divcardTxt.classList.add("card_text");
-    divcardTxt.setAttribute("id", "cardText");
-
-    const divImg = document.createElement("div");
-    divImg.classList.add("card_imagen");
-
-    const imgCard = document.createElement("img");
-    imgCard.src = song.img;
-
-    const cardTitle = document.createElement("h4");
-    cardTitle.classList.add("songName");
-    cardTitle.textContent = song.name;
-
-    divCards.appendChild(divImg);
-    divCards.appendChild(divcardTxt);
-    divCards.appendChild(imgCard);
-    divCards.appendChild(cardTitle);
-
-    divImg.appendChild(imgCard);
-
-    divcardTxt.appendChild(cardTitle);
-
-    likedMusicElement.appendChild(divCards);
-  });
 }
 
 function removeLocalStorage(songID) {
@@ -499,4 +293,53 @@ function removeLocalStorage(songID) {
 
   let likedSongsArrayJSON = JSON.stringify(likedSongsArray);
   localStorage.setItem("LikedMusic", likedSongsArrayJSON);
+}
+
+function loadLocalStorage() {
+  let likedSongsArray = JSON.parse(localStorage.getItem("LikedMusic")) || [];
+
+  likedSongsArray.forEach((song) => {
+    const divCards = document.createElement("div");
+    divCards.classList.add("cards");
+
+    const divcardTxt = document.createElement("div");
+    divcardTxt.classList.add("card_text");
+    divcardTxt.setAttribute("id", "cardText");
+
+    const divSeparate = document.createElement("div");
+    divSeparate.classList.add("likeRemove");
+
+    const removeSpan = document.createElement("span");
+
+    const removeIcon = document.createElement("i");
+    removeIcon.classList.add("material-icons");
+    removeIcon.innerText = "thumb_down";
+
+    const divImg = document.createElement("div");
+    divImg.classList.add("card_imagen");
+
+    const imgCard = document.createElement("img");
+    imgCard.src = song.img;
+
+    const cardTitle = document.createElement("h4");
+    cardTitle.classList.add("songName");
+    cardTitle.textContent = song.name;
+
+    divCards.appendChild(divImg);
+    divCards.appendChild(divcardTxt);
+    divCards.appendChild(imgCard);
+    divCards.appendChild(cardTitle);
+    divImg.appendChild(imgCard);
+    divCards.appendChild(divSeparate);
+
+    divcardTxt.appendChild(cardTitle);
+    divcardTxt.appendChild(divSeparate);
+
+    divSeparate.appendChild(removeSpan);
+    divcardTxt.appendChild(removeIcon);
+
+    removeSpan.appendChild(removeIcon);
+
+    likedMusicElement.appendChild(divCards);
+  });
 }
