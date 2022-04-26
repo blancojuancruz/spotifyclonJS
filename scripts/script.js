@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   allMyMusic();
-  showLikedMusic(likedMusic);
+  showLikedMusic();
+  loadLocalStorage();
 });
+
 // CARGAR AL INICIO
 
 // VARIABLES INICIALIZADAS
@@ -28,19 +30,18 @@ const timeStart = document.getElementById("timerStart");
 const volumen = document.getElementsByClassName("barra_progresoVolume");
 const replay = document.getElementById("replay");
 const loopSong = document.getElementById("loopSong");
-const likedSongsModal = document.getElementById("likedSongsList");
-const likedMusicElement = document.getElementById("likedSongs");
 const closeX = document.getElementById("closeList");
-const likedMusic = [];
 const modalBtn = document.getElementById("modalButton");
 const modal = document.querySelector(".modalBody");
 const closeModal = document.getElementById("formIcon");
+const likedMusicElement = document.getElementById("likedSongs");
 const modalShow = document.getElementById("modal");
 const formBtn = document.getElementById("formButton");
 const closeSideModal = document.getElementById("closeSideModal");
 const modalForm = document.getElementById("modalForm");
 const user = document.getElementById("name");
 const userName = document.getElementById("userInput");
+const likedMusic = [];
 // VARIABLES INICIALIZADAS
 
 // ARRAY DE OBJETOS (CANCIONES)
@@ -176,6 +177,8 @@ function allMyMusic() {
       } else {
         likeSong.innerHTML = "favorite";
         removeFavorites(song.id);
+        let songID = likeSong.getAttribute("data-ID");
+        removeLocalStorage(songID);
       }
     };
 
@@ -233,45 +236,31 @@ const addFavorites = (id) => {
   const likedSong = songs.find((song) => song.id === id);
   likedMusic.push(likedSong);
   showLikedMusic(likedMusic);
+  addSongToLocalStorage(likedSong);
 };
 // AÑADIR A ME GUSTA
 
 // QUITAR DE ME GUSTA
-const removeFavorites = (songID) => {
-  const item = likedMusic.find((song) => song.id === songID);
-  const index = likedMusic.indexOf(item);
+const removeFavorites = (id) => {
+  let item = likedMusic.find((song) => song.id === id);
+  let index = likedMusic.indexOf(item);
   likedMusic.splice(index, 1);
-  showLikedMusic(likedMusic);
-  eliminarLS(likedMusic);
+  showLikedMusic();
 };
 // QUITAR DE ME GUSTA
 
-likedSongsModal.addEventListener("click", () => {
-  showLikedMusic(likedMusic);
-  likedMusicElement.classList.add("showFavoriteSongs");
-});
-
-function showLikedMusic(likedMusic) {
+function showLikedMusic() {
   likedMusicElement.innerHTML = "";
 
-  const closeList = document.createElement("span");
-  closeList.classList.add("material-icons", "closeList");
-  closeList.setAttribute("id", "closeSideModal");
-  closeList.textContent = "close";
-  closeList.onclick = () => {
-    likedMusicElement.classList.remove("showFavoriteSongs");
-  };
+  const title = document.createElement("h3");
+  title.textContent = "Tus favoritos";
 
-  const titleCont = document.createElement("h3");
-  titleCont.textContent = "Tus favoritos";
-
-  likedMusicElement.appendChild(closeList);
-  likedMusicElement.appendChild(titleCont);
-  addSongToLocalStorage(likedMusic);
+  likedMusicElement.appendChild(title);
 
   likedMusic.forEach((song) => {
     const divCards = document.createElement("div");
     divCards.classList.add("cards");
+    divCards.setAttribute("data-ID", song["songID"]);
 
     const divcardTxt = document.createElement("div");
     divcardTxt.classList.add("card_text");
@@ -457,33 +446,57 @@ modalForm.addEventListener("submit", (e) => {
   user.innerHTML = userName.value;
 });
 
-function addSongToLocalStorage(myLocalStorage) {
-  let songs;
-  songs = this.songObjLocalStorage();
-  songs.push(myLocalStorage);
-  localStorage.setItem("likedSongs", JSON.stringify(songs));
+function addSongToLocalStorage(song) {
+  let likedSongsArray = JSON.parse(localStorage.getItem("LikedMusic")) || [];
+  likedSongsArray.push(song);
+
+  // TRANSFORMO MI ARRAY DE OBJETOS A JSON
+  let likedSongsArrayJSON = JSON.stringify(likedSongsArray);
+  //SETEO ITEM A GUARDAR KEY LIKED MUSIC Y EN QUE VALOR
+  localStorage.setItem("LikedMusic", likedSongsArrayJSON);
 }
 
-function songObjLocalStorage() {
-  let songLS;
+function loadLocalStorage() {
+  let likedSongsArray = JSON.parse(localStorage.getItem("LikedMusic"));
 
-  if (localStorage.getItem("likedSongs") === null) {
-    songLS = [];
-  } else {
-    songLS = JSON.parse(localStorage.getItem("likedSongs"));
-  }
+  likedSongsArray.forEach((song) => {
+    const divCards = document.createElement("div");
+    divCards.classList.add("cards");
 
-  return songLS;
-}
+    const divcardTxt = document.createElement("div");
+    divcardTxt.classList.add("card_text");
+    divcardTxt.setAttribute("id", "cardText");
 
-function eliminarLS(songID) {
-  let songsLS;
-  songsLS = this.songObjLocalStorage();
-  songsLS.forEach(function (songLS, index) {
-    if (songLS.id === songID) {
-      songsLS.splice(index, 1);
-    }
+    const divImg = document.createElement("div");
+    divImg.classList.add("card_imagen");
+
+    const imgCard = document.createElement("img");
+    imgCard.src = song.img;
+
+    const cardTitle = document.createElement("h4");
+    cardTitle.classList.add("songName");
+    cardTitle.textContent = song.name;
+
+    divCards.appendChild(divImg);
+    divCards.appendChild(divcardTxt);
+    divCards.appendChild(imgCard);
+    divCards.appendChild(cardTitle);
+
+    divImg.appendChild(imgCard);
+
+    divcardTxt.appendChild(cardTitle);
+
+    likedMusicElement.appendChild(divCards);
   });
+}
 
-  localStorage.setItem("likedSongs", JSON.stringify(songsLS));
+function removeLocalStorage(songID) {
+  let likedSongsArray = JSON.parse(localStorage.getItem("LikedMusic"));
+
+  let likedSongIndex = likedSongsArray.find((song) => song.songID === songID);
+
+  likedSongsArray.splice(likedSongIndex, 1);
+
+  let likedSongsArrayJSON = JSON.stringify(likedSongsArray);
+  localStorage.setItem("LikedMusic", likedSongsArrayJSON);
 }
