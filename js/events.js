@@ -15,13 +15,7 @@ function loadEvents() {
     progress = parseInt((audioSong.currentTime / audioSong.duration) * 100);
     progressBar.value = progress;
 
-    const addCero = (valor) => {
-      if (valor < 10) {
-        return "0" + valor;
-      } else {
-        return "" + valor;
-      }
-    };
+    const addCero = (value) => (value < 10 ? "0" + value : "" + value);
 
     const minutos = (segundosP) => {
       const segundos = Math.round(segundosP % 0x3c).toString();
@@ -77,29 +71,17 @@ function loadEvents() {
   });
 
   audioSong.addEventListener("ended", () => {
-    if (songIndex >= 11) {
-      songIndex = 0;
-    } else {
-      songIndex += 1;
-    }
+    songIndex >= 11 ? (songIndex = 0) : (songIndex += 1);
     loadMusic();
   });
 
   nextSong.addEventListener("click", () => {
-    if (songIndex >= 11) {
-      songIndex = 0;
-    } else {
-      songIndex += 1;
-    }
+    songIndex >= 11 ? (songIndex = 0) : (songIndex += 1);
     loadMusic();
   });
 
   prevSong.addEventListener("click", () => {
-    if (songIndex <= 0) {
-      songIndex = 0;
-    } else {
-      songIndex -= 1;
-    }
+    songIndex <= 0 ? (songIndex = 0) : (songIndex -= 1);
     loadMusic();
   });
 
@@ -131,8 +113,19 @@ function loadEvents() {
 
   modalForm.addEventListener("submit", (e) => {
     e.preventDefault();
+
     modal.classList.remove("modalShow");
     modalShow.style.transform = "translateY(-200%)";
     user.innerHTML = userName.value;
+    changeStatus.innerText = "Cerrar Sesión";
+    modalBtn.style.display = "none";
+  });
+
+  changeStatus.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    user.innerHTML = "Usuario";
+    changeStatus.innerText = "Registrarte";
+    modalBtn.style.display = "";
   });
 }

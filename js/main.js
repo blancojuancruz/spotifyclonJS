@@ -1,19 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-  loadEvents();
   allMyMusic();
+  loadEvents();
   showLikedMusic();
   loadLocalStorage();
 });
-
-function loadMusic() {
-  audioSong.src = `audio/${songIndex + 1}.mp3`;
-  songName.innerText = `Now Playing: ${songs[songIndex].name}`;
-  timeDuration.innerText = songs[songIndex].duration;
-  audioSong.play();
-  audioSong.currentTime = 0;
-  playPause.classList.remove("bi-play-circle-fill");
-  playPause.classList.add("bi-pause-circle-fill");
-}
 
 const songs = [
   {
@@ -102,10 +92,23 @@ const songs = [
   },
 ];
 
+function loadMusic() {
+  audioSong.src = `audio/${songIndex + 1}.mp3`;
+  songName.innerText = `Now Playing: ${songs[songIndex].name}`;
+  timeDuration.innerText = songs[songIndex].duration;
+  audioSong.play();
+  audioSong.currentTime = 0;
+  playPause.classList.remove("bi-play-circle-fill");
+  playPause.classList.add("bi-pause-circle-fill");
+}
+
 function allMyMusic() {
   songs.forEach((song) => {
+    const { name, img, id } = song;
+
     const divCards = document.createElement("div");
     divCards.classList.add("cards");
+    divCards.setAttribute("id", id);
 
     const divcardTxt = document.createElement("div");
     divcardTxt.classList.add("card_text");
@@ -115,11 +118,11 @@ function allMyMusic() {
     divImg.classList.add("card_imagen");
 
     const imgCard = document.createElement("img");
-    imgCard.src = song.img;
+    imgCard.src = img;
 
     const cardTitle = document.createElement("h4");
     cardTitle.classList.add("songName");
-    cardTitle.textContent = song.name;
+    cardTitle.textContent = name;
 
     const divSeparate = document.createElement("div");
     divSeparate.classList.add("separate");
@@ -128,7 +131,7 @@ function allMyMusic() {
     cardSpan.classList.add("playSpan");
 
     const cardIcon = document.createElement("i");
-    cardIcon.id = song.id;
+    cardIcon.id = id;
     cardIcon.classList.add("bi-play-circle");
     cardIcon.classList.add("playSong");
 
@@ -138,11 +141,29 @@ function allMyMusic() {
     likeSong.classList.add("likeIcon");
     likeSong.classList.add("material-icons");
     likeSong.innerText = "favorite";
-    likeSong.onclick = () => {
-      addFavorites(song.id);
+    likeSong.id = id;
+    likeSong.addEventListener("click", () => {
+      let songID = id;
+      let songName = name;
+      likeSong.classList.add("like");
+      addFavorites(songID);
+      showLikedMusic();
 
-      likeSong.style.opacity = "0";
-    };
+      Toastify({
+        text: `(${songName}) Añadida a Favoritos`,
+        duration: 3000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+        onClick: function () {},
+      }).showToast();
+    });
 
     divCards.appendChild(divImg);
     divCards.appendChild(imgCard);
@@ -170,7 +191,6 @@ function allMyMusic() {
     cardContainer.appendChild(divCards);
   });
 
-  // FUNCION PARA QUE SUENE UNA CANCION A LA VEZ
   const oneatTime = () => {
     Array.from(document.getElementsByClassName("playSong")).forEach(
       (element) => {
@@ -179,7 +199,6 @@ function allMyMusic() {
       }
     );
   };
-  // FUNCION PARA QUE SUENE UNA CANCION A LA VEZ
 
   Array.from(document.getElementsByClassName("playSong")).forEach((element) => {
     element.addEventListener("click", (e) => {
@@ -193,17 +212,21 @@ function allMyMusic() {
 }
 
 function showLikedMusic() {
+  const likedMusicElement = document.getElementById("likedSongs");
+
   likedMusicElement.innerHTML = "";
 
   const title = document.createElement("h3");
-  title.textContent = "Tus favoritos";
+  title.textContent = "Tus Favoritos";
 
   likedMusicElement.appendChild(title);
 
   likedMusic.forEach((song) => {
+    const { name, img, id } = song;
+
     const divCards = document.createElement("div");
     divCards.classList.add("cards");
-    divCards.setAttribute("data-ID", song["songID"]);
+    divCards.setAttribute("id", id);
 
     const divcardTxt = document.createElement("div");
     divcardTxt.classList.add("card_text");
@@ -218,20 +241,36 @@ function showLikedMusic() {
     removeIcon.classList.add("material-icons");
     removeIcon.innerText = "thumb_down";
     removeIcon.onclick = () => {
-      removeFavorites();
-      let songID = removeIcon.getAttribute("data-ID");
+      let songID = id;
+      let songName = name;
       removeLocalStorage(songID);
+      removeFavorites(songID);
+
+      Toastify({
+        text: `(${songName}) Removida de favoritos`,
+        duration: 3000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "linear-gradient(to right, #e81471, #e51717)",
+        },
+        onClick: function () {},
+      }).showToast();
     };
 
     const divImg = document.createElement("div");
     divImg.classList.add("card_imagen");
 
     const imgCard = document.createElement("img");
-    imgCard.src = song.img;
+    imgCard.src = img;
 
     const cardTitle = document.createElement("h4");
     cardTitle.classList.add("songName");
-    cardTitle.textContent = song.name;
+    cardTitle.textContent = name;
 
     divCards.appendChild(divImg);
     divCards.appendChild(divcardTxt);
@@ -255,8 +294,10 @@ function showLikedMusic() {
 
 const addFavorites = (id) => {
   const likedSong = songs.find((song) => song.id === id);
-  likedMusic.push(likedSong);
-  showLikedMusic(likedMusic);
+  const songRepeat = likedMusic.find((item) => item.id === id);
+
+  songRepeat ? noRepeatSong.push(likedSong) : likedMusic.push(likedSong);
+
   addSongToLocalStorage(likedSong);
 };
 
@@ -264,7 +305,7 @@ const removeFavorites = (id) => {
   let item = likedMusic.find((song) => song.id === id);
   let index = likedMusic.indexOf(item);
   likedMusic.splice(index, 1);
-  showLikedMusic();
+  showLikedMusic(likedMusic);
 };
 
 const calculateTime = (secs) => {
@@ -276,18 +317,17 @@ const calculateTime = (secs) => {
 };
 
 function addSongToLocalStorage(song) {
-  let likedSongsArray = JSON.parse(localStorage.getItem("LikedMusic")) || [];
-  likedSongsArray.push(song);
+  const { id } = song;
+  const songRepeat = likedSongsArray.find((item) => item.id === id);
+
+  songRepeat ? noRepeatSong.push(song) : likedSongsArray.push(song);
 
   let likedSongsArrayJSON = JSON.stringify(likedSongsArray);
-
   localStorage.setItem("LikedMusic", likedSongsArrayJSON);
 }
 
 function removeLocalStorage(songID) {
-  let likedSongsArray = JSON.parse(localStorage.getItem("LikedMusic"));
-
-  let likedSongIndex = likedSongsArray.find((song) => song.songID === songID);
+  let likedSongIndex = likedSongsArray.find((song) => song.id === songID);
 
   likedSongsArray.splice(likedSongIndex, 1);
 
@@ -296,9 +336,11 @@ function removeLocalStorage(songID) {
 }
 
 function loadLocalStorage() {
-  let likedSongsArray = JSON.parse(localStorage.getItem("LikedMusic")) || [];
+  const likedMusicElement = document.getElementById("likedSongs");
 
   likedSongsArray.forEach((song) => {
+    const { name, img, id } = song;
+
     const divCards = document.createElement("div");
     divCards.classList.add("cards");
 
@@ -319,11 +361,11 @@ function loadLocalStorage() {
     divImg.classList.add("card_imagen");
 
     const imgCard = document.createElement("img");
-    imgCard.src = song.img;
+    imgCard.src = img;
 
     const cardTitle = document.createElement("h4");
     cardTitle.classList.add("songName");
-    cardTitle.textContent = song.name;
+    cardTitle.textContent = name;
 
     divCards.appendChild(divImg);
     divCards.appendChild(divcardTxt);
