@@ -31,7 +31,10 @@ function loadEvents() {
     audioSong.currentTime = (progressBar.value * audioSong.duration) / 100;
   });
 
-  audioSong.addEventListener("ended", () => {
+  audioSong.addEventListener("ended", async () => {
+    const data = await fetch("/js/data.json");
+    const songs = await data.json();
+
     let switchIcon = loopSong.innerText;
 
     switch (switchIcon) {

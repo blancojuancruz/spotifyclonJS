@@ -5,94 +5,97 @@ document.addEventListener("DOMContentLoaded", () => {
   loadLocalStorage();
 });
 
-const songs = [
-  {
-    name: "YSY A - DESFILAR MIS PENAS (PROD. ASAN)",
-    filePath: "audio/1.mp3",
-    img: "https://i.scdn.co/image/ab67616d0000b2738f2162551691a5954d928290",
-    id: 0,
-    duration: "02:31",
-  },
-  {
-    name: "Kidd Keo - Level Up ft. Enry K, Yay",
-    filePath: "audio/2.mp3",
-    img: "https://i.scdn.co/image/ab67616d0000b273c5714b3429d64d2679742348",
-    id: 1,
-    duration: "03:38",
-  },
-  {
-    name: "Rauw Alejandro & Chencho Corleone - Desesperados",
-    filePath: "audio/3.mp3",
-    img: "https://i.scdn.co/image/ab67616d0000b2733752b28d1b65cc1ce6da67a7",
-    id: 2,
-    duration: "03:51",
-  },
-  {
-    name: "Feid, Alejo & Robi - Pantysito",
-    filePath: "audio/4.mp3",
-    img: "https://i.scdn.co/image/ab67616d0000b27303a184c19d99418042ddf68a",
-    id: 3,
-    duration: "03:56",
-  },
-  {
-    name: "DUKI - TOP 5 - Temporada de Reggaeton",
-    filePath: "audio/5.mp3",
-    img: "https://i.scdn.co/image/ab67616d0000b273142334e67b095d6aa56655b9",
-    id: 4,
-    duration: "03:04",
-  },
-  {
-    name: "DUKI - Sudor y trabajo",
-    filePath: "audio/6.mp3",
-    img: "https://i.scdn.co/image/ab67616d0000b273305240b65c28020de3aac8eb",
-    id: 5,
-    duration: "03:16",
-  },
-  {
-    name: "Midnight City - M83",
-    filePath: "audio/7.mp3",
-    img: "https://i.scdn.co/image/ab67616d0000b273b3591763154a27326b3f431a",
-    id: 6,
-    duration: "04:03",
-  },
-  {
-    name: "Save Me - LISTENBEE, Naz Tokio",
-    filePath: "audio/8.mp3",
-    img: "https://i.scdn.co/image/ab67616d0000b27325b3149f3280cbd97ea8dbb1",
-    id: 7,
-    duration: "03:29",
-  },
-  {
-    name: "Tuesday (feat. Danelle Sandoval)",
-    filePath: "audio/9.mp3",
-    img: "https://i.scdn.co/image/ab67616d0000b27312b939225600b564150c0a68",
-    id: 8,
-    duration: "02:35",
-  },
-  {
-    name: "All I Need - Ehrling",
-    filePath: "audio/10.mp3",
-    img: "https://i.scdn.co/image/ab67616d0000b273e903f6908b068d0f0a74a92f",
-    id: 9,
-    duration: "03:10",
-  },
-  {
-    name: "Para Siempre Diego - Los Ratones Paranoicos",
-    filePath: "audio/11.mp3",
-    img: "https://i.scdn.co/image/ab67616d0000b273b0289fb853c995d7bdad4e9d",
-    id: 10,
-    duration: "04:38",
-  },
-  {
-    name: "Imagine Dragons - Enemy (with JID)",
-    filePath: "audio/12.mp3",
-    img: "https://i.scdn.co/image/ab67616d0000b273d9b35d1c4d15c9de88b754a7",
-    id: 11,
-    duration: "02:53",
-  },
-];
+// const songs = [
+//   {
+//     name: "YSY A - DESFILAR MIS PENAS (PROD. ASAN)",
+//     filePath: "audio/1.mp3",
+//     img: "https://i.scdn.co/image/ab67616d0000b2738f2162551691a5954d928290",
+//     id: 0,
+//     duration: "02:31",
+//   },
+//   {
+//     name: "Kidd Keo - Level Up ft. Enry K, Yay",
+//     filePath: "audio/2.mp3",
+//     img: "https://i.scdn.co/image/ab67616d0000b273c5714b3429d64d2679742348",
+//     id: 1,
+//     duration: "03:38",
+//   },
+//   {
+//     name: "Rauw Alejandro & Chencho Corleone - Desesperados",
+//     filePath: "audio/3.mp3",
+//     img: "https://i.scdn.co/image/ab67616d0000b2733752b28d1b65cc1ce6da67a7",
+//     id: 2,
+//     duration: "03:51",
+//   },
+//   {
+//     name: "Feid, Alejo & Robi - Pantysito",
+//     filePath: "audio/4.mp3",
+//     img: "https://i.scdn.co/image/ab67616d0000b27303a184c19d99418042ddf68a",
+//     id: 3,
+//     duration: "03:56",
+//   },
+//   {
+//     name: "DUKI - TOP 5 - Temporada de Reggaeton",
+//     filePath: "audio/5.mp3",
+//     img: "https://i.scdn.co/image/ab67616d0000b273142334e67b095d6aa56655b9",
+//     id: 4,
+//     duration: "03:04",
+//   },
+//   {
+//     name: "DUKI - Sudor y trabajo",
+//     filePath: "audio/6.mp3",
+//     img: "https://i.scdn.co/image/ab67616d0000b273305240b65c28020de3aac8eb",
+//     id: 5,
+//     duration: "03:16",
+//   },
+//   {
+//     name: "Midnight City - M83",
+//     filePath: "audio/7.mp3",
+//     img: "https://i.scdn.co/image/ab67616d0000b273b3591763154a27326b3f431a",
+//     id: 6,
+//     duration: "04:03",
+//   },
+//   {
+//     name: "Save Me - LISTENBEE, Naz Tokio",
+//     filePath: "audio/8.mp3",
+//     img: "https://i.scdn.co/image/ab67616d0000b27325b3149f3280cbd97ea8dbb1",
+//     id: 7,
+//     duration: "03:29",
+//   },
+//   {
+//     name: "Tuesday (feat. Danelle Sandoval)",
+//     filePath: "audio/9.mp3",
+//     img: "https://i.scdn.co/image/ab67616d0000b27312b939225600b564150c0a68",
+//     id: 8,
+//     duration: "02:35",
+//   },
+//   {
+//     name: "All I Need - Ehrling",
+//     filePath: "audio/10.mp3",
+//     img: "https://i.scdn.co/image/ab67616d0000b273e903f6908b068d0f0a74a92f",
+//     id: 9,
+//     duration: "03:10",
+//   },
+//   {
+//     name: "Para Siempre Diego - Los Ratones Paranoicos",
+//     filePath: "audio/11.mp3",
+//     img: "https://i.scdn.co/image/ab67616d0000b273b0289fb853c995d7bdad4e9d",
+//     id: 10,
+//     duration: "04:38",
+//   },
+//   {
+//     name: "Imagine Dragons - Enemy (with JID)",
+//     filePath: "audio/12.mp3",
+//     img: "https://i.scdn.co/image/ab67616d0000b273d9b35d1c4d15c9de88b754a7",
+//     id: 11,
+//     duration: "02:53",
+//   },
+// ];
 
-function loadMusic() {
+const loadMusic = async () => {
+  const data = await fetch("/js/data.json");
+  const songs = await data.json();
+
   audioSong.src = `audio/${songIndex + 1}.mp3`;
   songName.innerText = `Now Playing: ${songs[songIndex].name}`;
   timeDuration.innerText = songs[songIndex].duration;
@@ -100,9 +103,12 @@ function loadMusic() {
   audioSong.currentTime = 0;
   playPause.classList.remove("bi-play-circle-fill");
   playPause.classList.add("bi-pause-circle-fill");
-}
+};
 
-function allMyMusic() {
+const allMyMusic = async () => {
+  const data = await fetch("/js/data.json");
+  const songs = await data.json();
+
   songs.forEach((song) => {
     const { name, img, id } = song;
 
@@ -152,7 +158,6 @@ function allMyMusic() {
       Toastify({
         text: `(${songName}) Añadida a Favoritos`,
         duration: 3000,
-        destination: "https://github.com/apvarun/toastify-js",
         newWindow: true,
         close: true,
         gravity: "bottom",
@@ -209,9 +214,12 @@ function allMyMusic() {
       loadMusic();
     });
   });
-}
+};
 
-function showLikedMusic() {
+const showLikedMusic = async () => {
+  const data = await fetch("/js/data.json");
+  const songs = await data.json();
+
   const likedMusicElement = document.getElementById("likedSongs");
 
   likedMusicElement.innerHTML = "";
@@ -249,7 +257,6 @@ function showLikedMusic() {
       Toastify({
         text: `(${songName}) Removida de favoritos`,
         duration: 3000,
-        destination: "https://github.com/apvarun/toastify-js",
         newWindow: true,
         close: true,
         gravity: "top",
@@ -290,9 +297,12 @@ function showLikedMusic() {
 
     likedMusicElement.appendChild(divCards);
   });
-}
+};
 
-const addFavorites = (id) => {
+const addFavorites = async (id) => {
+  const data = await fetch("/js/data.json");
+  const songs = await data.json();
+
   const likedSong = songs.find((song) => song.id === id);
   const songRepeat = likedMusic.find((item) => item.id === id);
 
@@ -301,7 +311,10 @@ const addFavorites = (id) => {
   addSongToLocalStorage(likedSong);
 };
 
-const removeFavorites = (id) => {
+const removeFavorites = async (id) => {
+  const data = await fetch("/js/data.json");
+  const songs = await data.json();
+
   let item = likedMusic.find((song) => song.id === id);
   let index = likedMusic.indexOf(item);
   likedMusic.splice(index, 1);
@@ -316,7 +329,7 @@ const calculateTime = (secs) => {
   return `${returnedMinutes}:${returnedSeconds}`;
 };
 
-function addSongToLocalStorage(song) {
+const addSongToLocalStorage = (song) => {
   const { id } = song;
   const songRepeat = likedSongsArray.find((item) => item.id === id);
 
@@ -324,18 +337,21 @@ function addSongToLocalStorage(song) {
 
   let likedSongsArrayJSON = JSON.stringify(likedSongsArray);
   localStorage.setItem("LikedMusic", likedSongsArrayJSON);
-}
+};
 
-function removeLocalStorage(songID) {
+const removeLocalStorage = (songID) => {
   let likedSongIndex = likedSongsArray.find((song) => song.id === songID);
 
   likedSongsArray.splice(likedSongIndex, 1);
 
   let likedSongsArrayJSON = JSON.stringify(likedSongsArray);
   localStorage.setItem("LikedMusic", likedSongsArrayJSON);
-}
+};
 
-function loadLocalStorage() {
+const loadLocalStorage = async () => {
+  const data = await fetch("/js/data.json");
+  const songs = await data.json();
+
   const likedMusicElement = document.getElementById("likedSongs");
 
   likedSongsArray.forEach((song) => {
@@ -384,4 +400,4 @@ function loadLocalStorage() {
 
     likedMusicElement.appendChild(divCards);
   });
-}
+};

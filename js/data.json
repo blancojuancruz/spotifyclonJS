@@ -1,0 +1,86 @@
+[
+  {
+    "name": "YSY A - DESFILAR MIS PENAS (PROD. ASAN)",
+    "filePath": "audio/1.mp3",
+    "img": "https://i.scdn.co/image/ab67616d0000b2738f2162551691a5954d928290",
+    "id": 0,
+    "duration": "02:31"
+  },
+  {
+    "name": "Kidd Keo - Level Up ft. Enry K, Yay",
+    "filePath": "audio/2.mp3",
+    "img": "https://i.scdn.co/image/ab67616d0000b273c5714b3429d64d2679742348",
+    "id": 1,
+    "duration": "03:38"
+  },
+  {
+    "name": "Rauw Alejandro & Chencho Corleone - Desesperados",
+    "filePath": "audio/3.mp3",
+    "img": "https://i.scdn.co/image/ab67616d0000b2733752b28d1b65cc1ce6da67a7",
+    "id": 2,
+    "duration": "03:51"
+  },
+  {
+    "name": "Feid, Alejo & Robi - Pantysito",
+    "filePath": "audio/4.mp3",
+    "img": "https://i.scdn.co/image/ab67616d0000b27303a184c19d99418042ddf68a",
+    "id": 3,
+    "duration": "03:56"
+  },
+  {
+    "name": "DUKI - TOP 5 - Temporada de Reggaeton",
+    "filePath": "audio/5.mp3",
+    "img": "https://i.scdn.co/image/ab67616d0000b273142334e67b095d6aa56655b9",
+    "id": 4,
+   "duration": "03:04"
+  },
+  {
+    "name": "DUKI - Sudor y trabajo",
+    "filePath": "audio/6.mp3",
+    "img": "https://i.scdn.co/image/ab67616d0000b273305240b65c28020de3aac8eb",
+    "id": 5,
+    "duration": "03:16"
+  },
+  {
+    "name": "Midnight City - M83",
+    "filePath": "audio/7.mp3",
+    "img": "https://i.scdn.co/image/ab67616d0000b273b3591763154a27326b3f431a",
+    "id": 6,
+    "duration": "04:03"
+  },
+  {
+    "name": "Save Me - LISTENBEE, Naz Tokio",
+    "filePath": "audio/8.mp3",
+    "img": "https://i.scdn.co/image/ab67616d0000b27325b3149f3280cbd97ea8dbb1",
+    "id": 7,
+    "duration": "03:29"
+  },
+  {
+    "name": "Tuesday (feat. Danelle Sandoval)",
+    "filePath": "audio/9.mp3",
+    "img": "https://i.scdn.co/image/ab67616d0000b27312b939225600b564150c0a68",
+    "id": 8,
+    "duration": "02:35"
+  },
+  {
+    "name": "All I Need - Ehrling",
+    "filePath": "audio/10.mp3",
+    "img": "https://i.scdn.co/image/ab67616d0000b273e903f6908b068d0f0a74a92f",
+    "id": 9,
+    "duration": "03:10"
+  },
+  {
+    "name": "Para Siempre Diego - Los Ratones Paranoicos",
+    "filePath": "audio/11.mp3",
+    "img": "https://i.scdn.co/image/ab67616d0000b273b0289fb853c995d7bdad4e9d",
+    "id": 10,
+    "duration": "04:38"
+  },
+  {
+    "name": "Imagine Dragons - Enemy (with JID)",
+    "filePath": "audio/12.mp3",
+    "img": "https://i.scdn.co/image/ab67616d0000b273d9b35d1c4d15c9de88b754a7",
+    "id": 11,
+    "duration": "02:53"
+  }
+]

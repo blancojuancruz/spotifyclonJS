@@ -26,3 +26,4 @@ const userName = document.getElementById("userInput");
 const changeStatus = document.getElementById("nombre");
 const likedMusic = [];
 let noRepeatSong = [];
+// /js/data.json
