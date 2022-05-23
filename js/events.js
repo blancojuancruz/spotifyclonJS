@@ -73,6 +73,30 @@ function loadEvents() {
     }
   });
 
+  volumeRange.addEventListener("input", () => {
+    audioSong.volume = volumeRange.value / 100;
+
+    volumeRange.value <= 0
+      ? (masterVolume.innerText = "volume_off")
+      : (masterVolume.innerText = "volume_up");
+  });
+
+  masterVolume.addEventListener("click", () => {
+    let switchIcon = masterVolume.innerText;
+
+    switch (switchIcon) {
+      case "volume_up":
+        masterVolume.innerHTML = "volume_off";
+        audioSong.volume = 0;
+        break;
+
+      case "volume_off":
+        masterVolume.innerHTML = "volume_up";
+        audioSong.volume = 1;
+        break;
+    }
+  });
+
   audioSong.addEventListener("ended", () => {
     songIndex >= 11 ? (songIndex = 0) : (songIndex += 1);
     loadMusic();

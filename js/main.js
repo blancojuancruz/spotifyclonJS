@@ -248,7 +248,7 @@ const showLikedMusic = async () => {
     const removeIcon = document.createElement("i");
     removeIcon.classList.add("material-icons");
     removeIcon.innerText = "thumb_down";
-    removeIcon.onclick = () => {
+    removeIcon.addEventListener("click", () => {
       let songID = id;
       let songName = name;
       removeLocalStorage(songID);
@@ -267,7 +267,7 @@ const showLikedMusic = async () => {
         },
         onClick: function () {},
       }).showToast();
-    };
+    });
 
     const divImg = document.createElement("div");
     divImg.classList.add("card_imagen");

@@ -5,6 +5,7 @@ const progressBar = document.getElementById("progressBar");
 const playPause = document.getElementById("playPause");
 const songName = document.getElementById("songName");
 const masterVolume = document.getElementById("masterVolume");
+const volumeRange = document.querySelector("input");
 const nextSong = document.getElementById("nextArrow");
 const prevSong = document.getElementById("prevArrow");
 const cardContainer = document.querySelector(".generos");
@@ -26,4 +27,3 @@ const userName = document.getElementById("userInput");
 const changeStatus = document.getElementById("nombre");
 const likedMusic = [];
 let noRepeatSong = [];
-// /js/data.json
