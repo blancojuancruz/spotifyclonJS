@@ -385,7 +385,6 @@ body {
     color: #e01414d7;
 }
 
-
 .container section .contenedor_contenido .podcast .card_podcast {
     transition: var(--efecto);
     display: flex;

@@ -142,8 +142,7 @@ const allMyMusic = async () => {
     cardIcon.classList.add("playSong");
 
     const likeSpan = document.createElement("span");
-    likeSpan.classList.add("likeIcon");
-    console.log(likeSpan);
+    likeSpan.classList.add("likeSpan");
 
     const likeSong = document.createElement("i");
     likeSong.classList.add("material-icons");
@@ -277,7 +276,7 @@ const showLikedMusic = async () => {
       removeFavorites(songID);
 
       Toastify({
-        text: `(${songName}) Removida de favoritos`,
+        text: `(${songName} Removida de favoritos`,
         duration: 3000,
         newWindow: true,
         close: true,
@@ -337,6 +336,9 @@ const removeFavorites = async (id) => {
   const data = await fetch("/js/data.json");
   const songs = await data.json();
 
+  // likeIcon.classList.remove("like");
+  // likeIcon.classList.add("disLike");
+
   let item = likedMusic.find((song) => song.id === id);
   let index = likedMusic.indexOf(item);
   likedMusic.splice(index, 1);
@@ -394,27 +396,6 @@ const loadLocalStorage = async () => {
     const removeIcon = document.createElement("i");
     removeIcon.classList.add("material-icons");
     removeIcon.innerText = "thumb_down";
-    removeIcon.addEventListener("click", () => {
-      let songID = id;
-      let songName = name;
-
-      removeFavorites(songID);
-      removeLocalStorage(songID);
-
-      Toastify({
-        text: `(${songName}) Removida de favoritos`,
-        duration: 3000,
-        newWindow: true,
-        close: true,
-        gravity: "top",
-        position: "right",
-        stopOnFocus: true,
-        style: {
-          background: "linear-gradient(to right, #e81471, #e51717)",
-        },
-        onClick: function () {},
-      }).showToast();
-    });
 
     const divImg = document.createElement("div");
     divImg.classList.add("card_imagen");
