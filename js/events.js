@@ -92,7 +92,7 @@ function loadEvents() {
 
       case "volume_off":
         masterVolume.innerHTML = "volume_up";
-        audioSong.volume = 1;
+        audioSong.volume = volumeRange.value / 100;
         break;
     }
   });

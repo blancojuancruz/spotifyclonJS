@@ -142,9 +142,10 @@ const allMyMusic = async () => {
     cardIcon.classList.add("playSong");
 
     const likeSpan = document.createElement("span");
+    likeSpan.classList.add("likeIcon");
+    console.log(likeSpan);
 
     const likeSong = document.createElement("i");
-    likeSong.classList.add("likeIcon");
     likeSong.classList.add("material-icons");
     likeSong.innerText = "favorite";
     likeSong.id = id;
@@ -155,19 +156,40 @@ const allMyMusic = async () => {
       addFavorites(songID);
       showLikedMusic();
 
-      Toastify({
-        text: `(${songName}) Añadida a Favoritos`,
-        duration: 3000,
-        newWindow: true,
-        close: true,
-        gravity: "bottom",
-        position: "right",
-        stopOnFocus: true,
-        style: {
-          background: "linear-gradient(to right, #00b09b, #96c93d)",
-        },
-        onClick: function () {},
-      }).showToast();
+      const songRepeat = likedMusic.find((item) => item.id === id);
+
+      if (songRepeat) {
+        Toastify({
+          text: `${songName} ya es parte de tus favoritos!`,
+          duration: 3000,
+          newWindow: true,
+          close: true,
+          gravity: "bottom",
+          position: "left",
+          stopOnFocus: true,
+          avatar: img,
+          style: {
+            background:
+              "linear-gradient(to right, rgba(131,58,180,1), rgba(252,176,69,1))",
+          },
+          onClick: function () {},
+        }).showToast();
+      } else {
+        Toastify({
+          text: `¡Felicitaciones! Te gustó: ${songName}`,
+          duration: 3000,
+          newWindow: true,
+          close: true,
+          gravity: "bottom",
+          position: "right",
+          stopOnFocus: true,
+          avatar: img,
+          style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)",
+          },
+          onClick: function () {},
+        }).showToast();
+      }
     });
 
     divCards.appendChild(divImg);
@@ -372,6 +394,27 @@ const loadLocalStorage = async () => {
     const removeIcon = document.createElement("i");
     removeIcon.classList.add("material-icons");
     removeIcon.innerText = "thumb_down";
+    removeIcon.addEventListener("click", () => {
+      let songID = id;
+      let songName = name;
+
+      removeFavorites(songID);
+      removeLocalStorage(songID);
+
+      Toastify({
+        text: `(${songName}) Removida de favoritos`,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "linear-gradient(to right, #e81471, #e51717)",
+        },
+        onClick: function () {},
+      }).showToast();
+    });
 
     const divImg = document.createElement("div");
     divImg.classList.add("card_imagen");
