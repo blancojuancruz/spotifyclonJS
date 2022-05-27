@@ -93,7 +93,9 @@ document.addEventListener("DOMContentLoaded", () => {
 // ];
 
 const loadMusic = async () => {
-  const data = await fetch("/js/data.json");
+  const data = await fetch(
+    "https://629003ea665ea71fe12bfae1.mockapi.io/api/v1/songs"
+  );
   const songs = await data.json();
 
   audioSong.src = `audio/${songIndex + 1}.mp3`;
@@ -106,7 +108,9 @@ const loadMusic = async () => {
 };
 
 const allMyMusic = async () => {
-  const data = await fetch("/js/data.json");
+  const data = await fetch(
+    "https://629003ea665ea71fe12bfae1.mockapi.io/api/v1/songs"
+  );
   const songs = await data.json();
 
   songs.forEach((song) => {
@@ -238,7 +242,9 @@ const allMyMusic = async () => {
 };
 
 const showLikedMusic = async () => {
-  const data = await fetch("/js/data.json");
+  const data = await fetch(
+    "https://629003ea665ea71fe12bfae1.mockapi.io/api/v1/songs"
+  );
   const songs = await data.json();
 
   const likedMusicElement = document.getElementById("likedSongs");
@@ -321,7 +327,9 @@ const showLikedMusic = async () => {
 };
 
 const addFavorites = async (id) => {
-  const data = await fetch("/js/data.json");
+  const data = await fetch(
+    "https://629003ea665ea71fe12bfae1.mockapi.io/api/v1/songs"
+  );
   const songs = await data.json();
 
   const likedSong = songs.find((song) => song.id === id);
@@ -333,7 +341,9 @@ const addFavorites = async (id) => {
 };
 
 const removeFavorites = async (id) => {
-  const data = await fetch("/js/data.json");
+  const data = await fetch(
+    "https://629003ea665ea71fe12bfae1.mockapi.io/api/v1/songs"
+  );
   const songs = await data.json();
 
   // likeIcon.classList.remove("like");
@@ -373,7 +383,9 @@ const removeLocalStorage = (songID) => {
 };
 
 const loadLocalStorage = async () => {
-  const data = await fetch("/js/data.json");
+  const data = await fetch(
+    "https://629003ea665ea71fe12bfae1.mockapi.io/api/v1/songs"
+  );
   const songs = await data.json();
 
   const likedMusicElement = document.getElementById("likedSongs");

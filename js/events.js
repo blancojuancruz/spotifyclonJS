@@ -32,7 +32,9 @@ function loadEvents() {
   });
 
   audioSong.addEventListener("ended", async () => {
-    const data = await fetch("/js/data.json");
+    const data = await fetch(
+      "https://629003ea665ea71fe12bfae1.mockapi.io/api/v1/songs"
+    );
     const songs = await data.json();
 
     let switchIcon = loopSong.innerText;
