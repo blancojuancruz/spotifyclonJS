@@ -150,6 +150,7 @@ const allMyMusic = async () => {
 
     const likeSong = document.createElement("i");
     likeSong.classList.add("material-icons");
+    likeSong.classList.add("forDislike");
     likeSong.innerText = "favorite";
     likeSong.id = id;
     likeSong.addEventListener("click", () => {
@@ -281,6 +282,12 @@ const showLikedMusic = async () => {
       removeLocalStorage(songID);
       removeFavorites(songID);
 
+      let forDislike = document.querySelectorAll(".forDislike");
+
+      forDislike.forEach((element) => {
+        element.classList.remove("like");
+      });
+
       Toastify({
         text: `(${songName} Removida de favoritos`,
         duration: 3000,
@@ -345,9 +352,6 @@ const removeFavorites = async (id) => {
     "https://629003ea665ea71fe12bfae1.mockapi.io/api/v1/songs"
   );
   const songs = await data.json();
-
-  // likeIcon.classList.remove("like");
-  // likeIcon.classList.add("disLike");
 
   let item = likedMusic.find((song) => song.id === id);
   let index = likedMusic.indexOf(item);

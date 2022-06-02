@@ -381,6 +381,10 @@ body {
     transition: var(--efecto);
 }
 
+.dislike {
+    color: #ffffff;
+}
+
 .like {
     color: #e01414d7;
 }
